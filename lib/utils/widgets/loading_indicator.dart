@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import '../../constants/app_colors.dart';
+
+/// A centered loading indicator using the app's primary color.
+/// Used as a loading placeholder across all features.
+class LoadingIndicator extends StatelessWidget {
+  /// Optional message displayed below the spinner.
+  final String? message;
+
+  const LoadingIndicator({super.key, this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 40,
+            width: 40,
+            child: CircularProgressIndicator(
+              strokeWidth: 3,
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+            ),
+          ),
+          if (message != null) ...[
+            const SizedBox(height: 16),
+            Text(
+              message!,
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
