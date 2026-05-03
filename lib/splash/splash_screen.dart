@@ -8,8 +8,6 @@ import '../login/bloc/login_event.dart';
 import '../login/bloc/login_state.dart';
 import '../login/repository/login_repository.dart';
 
-/// Splash screen shown on app launch.
-/// Creates its own LoginBloc to check for existing session.
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -19,11 +17,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  // Local BLoC instance — no global provider needed
-  final LoginBloc _loginBloc = LoginBloc(
-    loginRepository: LoginRepository(),
-  );
-
+  final LoginBloc _loginBloc = LoginBloc(loginRepository: LoginRepository());
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
@@ -31,27 +25,20 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1000),
     );
-
     _scaleAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
     );
-
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeIn),
     );
-
     _controller.forward();
 
-    // After 2 seconds, check session
     Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        _loginBloc.add(const SessionChecked());
-      }
+      if (mounted) _loginBloc.add(const SessionChecked());
     });
   }
 
@@ -83,7 +70,6 @@ class _SplashScreenState extends State<SplashScreen>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // App logo
                   Container(
                     width: 100,
                     height: 100,

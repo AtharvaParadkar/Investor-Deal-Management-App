@@ -1,9 +1,7 @@
 import '../model/deal_model.dart';
 
-/// Repository for deal data operations.
-/// Contains hardcoded mock deals and simulates network latency.
+/// Mock deal data source with simulated network latency.
 class DealRepository {
-  /// Hardcoded list of 12 mock deals covering diverse industries and risk levels.
   static const List<DealModel> _mockDeals = [
     DealModel(
       id: 'deal_001',
@@ -261,14 +259,11 @@ class DealRepository {
     ),
   ];
 
-  /// Fetches all available deals with simulated network latency.
   Future<List<DealModel>> fetchDeals() async {
-    // Simulate network latency
     await Future.delayed(const Duration(milliseconds: 1500));
     return _mockDeals;
   }
 
-  /// Fetches a single deal by its ID.
   Future<DealModel?> getDealById(String id) async {
     await Future.delayed(const Duration(milliseconds: 300));
     try {
@@ -278,7 +273,6 @@ class DealRepository {
     }
   }
 
-  /// Returns a list of all unique industries across deals.
   List<String> getAvailableIndustries() {
     return _mockDeals.map((d) => d.industry).toSet().toList()..sort();
   }

@@ -5,10 +5,7 @@ import '../../../constants/app_spacing.dart';
 import '../../../constants/app_text_styles.dart';
 import '../../../utils/helpers.dart';
 
-/// A line chart showing projected ROI growth over 5 years.
-/// Uses compound growth calculation with gradient fill under the line.
 class ROIProjectionChart extends StatelessWidget {
-  /// The expected ROI percentage for compound growth calculation.
   final double expectedROI;
 
   const ROIProjectionChart({super.key, required this.expectedROI});

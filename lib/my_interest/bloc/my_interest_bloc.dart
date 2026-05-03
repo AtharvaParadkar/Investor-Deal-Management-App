@@ -4,16 +4,10 @@ import '../repository/my_interest_repository.dart';
 import 'my_interest_event.dart';
 import 'my_interest_state.dart';
 
-/// BLoC for managing user's deal interests.
-/// Handles loading, adding, removing, and checking interest status.
 class MyInterestBloc extends Bloc<MyInterestEvent, MyInterestState> {
-  /// Repository for interest persistence.
   final MyInterestRepository _interestRepository;
-
-  /// Repository for fetching deal data to match IDs to full models.
   final DealRepository _dealRepository;
 
-  /// Creates a [MyInterestBloc] with the required repositories.
   MyInterestBloc({
     required MyInterestRepository interestRepository,
     required DealRepository dealRepository,
@@ -26,39 +20,31 @@ class MyInterestBloc extends Bloc<MyInterestEvent, MyInterestState> {
     on<CheckInterestStatus>(_onCheckInterestStatus);
   }
 
-  /// Loads all interests and matches them to deal data.
   Future<void> _onLoadMyInterests(
     LoadMyInterests event,
     Emitter<MyInterestState> emit,
   ) async {
     emit(const MyInterestsLoading());
-
     try {
       final ids = await _interestRepository.getInterestedDealIds();
       if (ids.isEmpty) {
         emit(const MyInterestsEmpty());
         return;
       }
-
+      // Match saved IDs to full deal models
       final allDeals = await _dealRepository.fetchDeals();
-      final interestedDeals = allDeals
-          .where((deal) => ids.contains(deal.id))
-          .toList();
-
+      final interestedDeals =
+          allDeals.where((deal) => ids.contains(deal.id)).toList();
       if (interestedDeals.isEmpty) {
         emit(const MyInterestsEmpty());
       } else {
-        emit(MyInterestsLoaded(
-          deals: interestedDeals,
-          interestedDealIds: ids,
-        ));
+        emit(MyInterestsLoaded(deals: interestedDeals, interestedDealIds: ids));
       }
     } catch (e) {
       emit(const MyInterestsEmpty());
     }
   }
 
-  /// Adds interest for a deal and emits toggled state.
   Future<void> _onAddInterest(
     AddInterest event,
     Emitter<MyInterestState> emit,
@@ -67,7 +53,6 @@ class MyInterestBloc extends Bloc<MyInterestEvent, MyInterestState> {
     emit(InterestToggled(dealId: event.dealId, isInterested: true));
   }
 
-  /// Removes interest from a deal and emits toggled state.
   Future<void> _onRemoveInterest(
     RemoveInterest event,
     Emitter<MyInterestState> emit,
@@ -76,7 +61,6 @@ class MyInterestBloc extends Bloc<MyInterestEvent, MyInterestState> {
     emit(InterestToggled(dealId: event.dealId, isInterested: false));
   }
 
-  /// Checks if the user is interested in a specific deal.
   Future<void> _onCheckInterestStatus(
     CheckInterestStatus event,
     Emitter<MyInterestState> emit,

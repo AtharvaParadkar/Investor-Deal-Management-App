@@ -3,22 +3,11 @@ import '../../constants/app_colors.dart';
 import '../../constants/app_spacing.dart';
 import '../../constants/app_text_styles.dart';
 
-/// A widget for displaying empty states with an icon, message, and optional action.
-/// Used when lists have no data or filters return no results.
 class EmptyStateWidget extends StatelessWidget {
-  /// Icon to display.
   final IconData icon;
-
-  /// Main message text.
   final String message;
-
-  /// Optional sub-message for additional context.
   final String? subMessage;
-
-  /// Optional action button label.
   final String? actionLabel;
-
-  /// Callback for the action button.
   final VoidCallback? onAction;
 
   const EmptyStateWidget({
@@ -44,16 +33,9 @@ class EmptyStateWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.surfaceElevated,
                 shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.divider,
-                  width: 1,
-                ),
+                border: Border.all(color: AppColors.divider, width: 1),
               ),
-              child: Icon(
-                icon,
-                size: 36,
-                color: AppColors.textSecondary,
-              ),
+              child: Icon(icon, size: 36, color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.xl),
             Text(

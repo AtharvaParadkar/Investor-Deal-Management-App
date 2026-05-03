@@ -3,40 +3,17 @@ import '../../constants/app_colors.dart';
 import '../../constants/app_spacing.dart';
 import '../../constants/app_text_styles.dart';
 
-/// A styled text input field with label, hint, error, and suffix icon support.
-/// Used throughout the app for form inputs.
 class AppTextField extends StatelessWidget {
-  /// Controller for the text field.
   final TextEditingController? controller;
-
-  /// Hint text displayed when the field is empty.
   final String? hintText;
-
-  /// Label text displayed above the field.
   final String? labelText;
-
-  /// Error text displayed below the field.
   final String? errorText;
-
-  /// Whether to obscure the text (for passwords).
   final bool obscureText;
-
-  /// Suffix icon widget (e.g., visibility toggle).
   final Widget? suffixIcon;
-
-  /// Prefix icon.
   final IconData? prefixIcon;
-
-  /// Keyboard type.
   final TextInputType? keyboardType;
-
-  /// Callback when text changes.
   final ValueChanged<String>? onChanged;
-
-  /// Form field validator.
   final String? Function(String?)? validator;
-
-  /// Text input action.
   final TextInputAction? textInputAction;
 
   const AppTextField({

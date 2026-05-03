@@ -16,8 +16,6 @@ import 'my_interest/bloc/my_interest_event.dart';
 import 'my_interest/repository/my_interest_repository.dart';
 import 'my_interest/ui/my_interests_screen.dart';
 
-/// Main scaffold with bottom navigation between Deals and My Interests.
-/// Creates all BLoCs locally and provides them to child screens.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -28,10 +26,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  // Create BLoC instances directly with simple constructor passing
-  final LoginBloc _loginBloc = LoginBloc(
-    loginRepository: LoginRepository(),
-  );
+  final LoginBloc _loginBloc = LoginBloc(loginRepository: LoginRepository());
   late final DealBloc _dealBloc;
   late final FilterBloc _filterBloc;
   final MyInterestBloc _interestBloc = MyInterestBloc(
@@ -44,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _dealBloc = DealBloc(dealRepository: DealRepository());
     _filterBloc = FilterBloc(dealBloc: _dealBloc);
-    // Load deals on screen init
     _dealBloc.add(const LoadDeals());
   }
 
@@ -59,8 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Provide BLoCs to children so DealListScreen, MyInterestsScreen,
-    // and DealDetailScreen can access them via context.read<>().
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginBloc>.value(value: _loginBloc),
@@ -92,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
               currentIndex: _currentIndex,
               onTap: (index) {
                 setState(() => _currentIndex = index);
-                // Reload interests when switching to My Interests tab
                 if (index == 1) {
                   _interestBloc.add(const LoadMyInterests());
                 }

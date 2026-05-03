@@ -1,10 +1,7 @@
-/// All user-facing strings are centralized here.
-/// No inline strings should be used in UI files.
 class AppStrings {
   AppStrings._();
 
-  // General
-  static const String appName = 'Investor Deal Management';
+  static const String appName = 'DealFlow';
   static const String appTagline = 'Smart Investments, Simplified';
 
   // Login
@@ -17,7 +14,8 @@ class AppStrings {
   static const String emailRequired = 'Email is required';
   static const String invalidEmail = 'Please enter a valid email';
   static const String passwordRequired = 'Password is required';
-  static const String passwordTooShort = 'Password must be at least 6 characters';
+  static const String passwordTooShort =
+      'Password must be at least 6 characters';
 
   // Deals
   static const String deals = 'Deals';
@@ -25,8 +23,10 @@ class AppStrings {
   static const String filterDeals = 'Filter Deals';
   static const String allDeals = 'All Deals';
   static const String noDealFound = 'No deals found';
-  static const String noDealsMatchFilter = 'No deals match your filters. Try adjusting your criteria.';
-  static const String errorLoadingDeals = 'Failed to load deals. Please try again.';
+  static const String noDealsMatchFilter =
+      'No deals match your filters. Try adjusting your criteria.';
+  static const String errorLoadingDeals =
+      'Failed to load deals. Please try again.';
   static const String retry = 'Retry';
   static const String investmentRequired = 'Investment Required';
   static const String expectedROI = 'Expected ROI';
@@ -50,7 +50,8 @@ class AppStrings {
   static const String imInterested = "I'm Interested";
   static const String removeInterest = 'Remove Interest';
   static const String dealClosed = 'Deal Closed';
-  static const String noInterestsYet = 'No interests yet.\nStart exploring deals!';
+  static const String noInterestsYet =
+      'No interests yet.\nStart exploring deals!';
   static const String interestAdded = 'Interest added successfully!';
   static const String interestRemoved = 'Interest removed';
   static const String exploreDeals = 'Explore Deals';

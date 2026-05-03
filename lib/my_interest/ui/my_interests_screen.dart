@@ -12,8 +12,6 @@ import '../bloc/my_interest_bloc.dart';
 import '../bloc/my_interest_event.dart';
 import '../bloc/my_interest_state.dart';
 
-/// Screen displaying all deals the user has expressed interest in.
-/// Reuses [DealCard] from deals feature with a remove button trailing.
 class MyInterestsScreen extends StatefulWidget {
   const MyInterestsScreen({super.key});
 
@@ -25,7 +23,6 @@ class _MyInterestsScreenState extends State<MyInterestsScreen> {
   @override
   void initState() {
     super.initState();
-    // Load interests when screen is shown
     context.read<MyInterestBloc>().add(const LoadMyInterests());
   }
 
@@ -36,30 +33,24 @@ class _MyInterestsScreenState extends State<MyInterestsScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.background,
         elevation: 0,
-        title: Text(AppStrings.myInterests, style: AppTextStyles.heading),
-      ),
+        title: Text(AppStrings.myInterests, style: AppTextStyles.heading)),
       body: BlocConsumer<MyInterestBloc, MyInterestState>(
         listener: (context, state) {
-          // After a remove toggle, reload the interests list
           if (state is InterestToggled && !state.isInterested) {
             context.read<MyInterestBloc>().add(const LoadMyInterests());
           }
         },
-        buildWhen: (previous, current) =>
-            current is! InterestToggled,
+        buildWhen: (previous, current) => current is! InterestToggled,
         builder: (context, state) {
           if (state is MyInterestsInitial || state is MyInterestsLoading) {
             return const LoadingIndicator(message: 'Loading your interests...');
           }
-
           if (state is MyInterestsEmpty) {
             return const EmptyStateWidget(
               icon: Icons.bookmark_border_rounded,
               message: AppStrings.noInterestsYet,
-              subMessage: 'Browse deals and mark the ones you like!',
-            );
+              subMessage: 'Browse deals and mark the ones you like!');
           }
-
           if (state is MyInterestsLoaded) {
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
@@ -72,52 +63,36 @@ class _MyInterestsScreenState extends State<MyInterestsScreen> {
                   return DealCard(
                     deal: deal,
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => DealDetailScreen(deal: deal),
+                      final interestBloc = context.read<MyInterestBloc>();
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => BlocProvider.value(
+                          value: interestBloc,
+                          child: DealDetailScreen(deal: deal),
                         ),
-                      ).then((_) {
-                        // Reload interests when returning from detail
-                        context
-                            .read<MyInterestBloc>()
-                            .add(const LoadMyInterests());
+                      )).then((_) {
+                        interestBloc.add(const LoadMyInterests());
                       });
                     },
                     trailing: GestureDetector(
                       onTap: () {
-                        context
-                            .read<MyInterestBloc>()
-                            .add(RemoveInterest(deal.id));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(AppStrings.interestRemoved),
-                            backgroundColor: AppColors.surfaceElevated,
-                            behavior: SnackBarBehavior.floating,
-                          ),
-                        );
+                        context.read<MyInterestBloc>().add(RemoveInterest(deal.id));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(AppStrings.interestRemoved),
+                          backgroundColor: AppColors.surfaceElevated,
+                          behavior: SnackBarBehavior.floating));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(6),
                         decoration: BoxDecoration(
                           color: AppColors.riskHigh.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: const Icon(
-                          Icons.bookmark_remove_outlined,
-                          size: 18,
-                          color: AppColors.riskHigh,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+                          borderRadius: BorderRadius.circular(8)),
+                        child: const Icon(Icons.bookmark_remove_outlined,
+                          size: 18, color: AppColors.riskHigh))));
+                }),
             );
           }
-
           return const SizedBox.shrink();
-        },
-      ),
+        }),
     );
   }
 }

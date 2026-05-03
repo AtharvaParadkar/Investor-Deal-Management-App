@@ -3,15 +3,11 @@ import '../../../constants/app_colors.dart';
 import '../../../constants/app_text_styles.dart';
 import '../../model/deal_model.dart';
 
-/// A badge displaying the current deal status (Open/Closed).
-/// Open is green, Closed is grey.
 class StatusBadge extends StatelessWidget {
-  /// The deal status to display.
   final DealStatus status;
 
   const StatusBadge({super.key, required this.status});
 
-  /// Returns the appropriate color for the status.
   Color get _color {
     switch (status) {
       case DealStatus.open:
@@ -21,7 +17,6 @@ class StatusBadge extends StatelessWidget {
     }
   }
 
-  /// Returns the display label for the status.
   String get _label {
     switch (status) {
       case DealStatus.open:
@@ -42,10 +37,7 @@ class StatusBadge extends StatelessWidget {
       ),
       child: Text(
         _label,
-        style: AppTextStyles.label.copyWith(
-          color: _color,
-          fontSize: 10,
-        ),
+        style: AppTextStyles.label.copyWith(color: _color, fontSize: 10),
       ),
     );
   }

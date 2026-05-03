@@ -7,17 +7,9 @@ import '../../model/deal_model.dart';
 import 'risk_chip.dart';
 import 'status_badge.dart';
 
-/// A card widget displaying a summary of an investment deal.
-/// Shows company name, industry, investment amount, ROI, risk, and status.
-/// Closed deals are displayed with reduced opacity.
 class DealCard extends StatelessWidget {
-  /// The deal to display.
   final DealModel deal;
-
-  /// Callback when the card is tapped.
   final VoidCallback? onTap;
-
-  /// Optional trailing widget (e.g., remove button for interests).
   final Widget? trailing;
 
   const DealCard({
@@ -56,7 +48,6 @@ class DealCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top row: Company name + Status badge
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -64,20 +55,13 @@ class DealCard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Hero(
-                          tag: 'deal_name_${deal.id}',
-                          child: Material(
-                            color: AppColors.transparent,
-                            child: Text(
-                              deal.companyName,
-                              style: AppTextStyles.subheading.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
+                        Text(
+                          deal.companyName,
+                          style: AppTextStyles.subheading.copyWith(
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                         const SizedBox(height: AppSpacing.xs),
-                        // Industry chip
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -113,18 +97,10 @@ class DealCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: AppSpacing.lg),
-
-              // Divider
-              Container(
-                height: 1,
-                color: AppColors.divider.withOpacity(0.3),
-              ),
+              Container(height: 1, color: AppColors.divider.withOpacity(0.3)),
               const SizedBox(height: AppSpacing.md),
-
-              // Bottom row: Investment, ROI, Risk
               Row(
                 children: [
-                  // Investment Amount
                   Expanded(
                     child: _MetricItem(
                       label: 'Investment',
@@ -132,7 +108,6 @@ class DealCard extends StatelessWidget {
                       valueColor: AppColors.textPrimary,
                     ),
                   ),
-                  // Expected ROI
                   Expanded(
                     child: _MetricItem(
                       label: 'ROI',
@@ -140,7 +115,6 @@ class DealCard extends StatelessWidget {
                       valueColor: AppColors.gold,
                     ),
                   ),
-                  // Risk Chip
                   RiskChip(riskLevel: deal.riskLevel, compact: true),
                 ],
               ),
@@ -152,7 +126,6 @@ class DealCard extends StatelessWidget {
   }
 }
 
-/// Internal widget for displaying a labeled metric value.
 class _MetricItem extends StatelessWidget {
   final String label;
   final String value;

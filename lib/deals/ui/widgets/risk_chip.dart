@@ -3,22 +3,12 @@ import '../../../constants/app_colors.dart';
 import '../../../constants/app_text_styles.dart';
 import '../../model/deal_model.dart';
 
-/// A color-coded chip displaying the risk level of a deal.
-/// Green for Low, Amber for Medium, Red for High.
 class RiskChip extends StatelessWidget {
-  /// The risk level to display.
   final RiskLevel riskLevel;
-
-  /// Optional smaller size variant.
   final bool compact;
 
-  const RiskChip({
-    super.key,
-    required this.riskLevel,
-    this.compact = false,
-  });
+  const RiskChip({super.key, required this.riskLevel, this.compact = false});
 
-  /// Returns the appropriate color for the risk level.
   Color get _color {
     switch (riskLevel) {
       case RiskLevel.low:
@@ -30,7 +20,6 @@ class RiskChip extends StatelessWidget {
     }
   }
 
-  /// Returns the display label for the risk level.
   String get _label {
     switch (riskLevel) {
       case RiskLevel.low:
@@ -60,10 +49,7 @@ class RiskChip extends StatelessWidget {
           Container(
             width: compact ? 5 : 6,
             height: compact ? 5 : 6,
-            decoration: BoxDecoration(
-              color: _color,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: _color, shape: BoxShape.circle),
           ),
           SizedBox(width: compact ? 4 : 6),
           Text(

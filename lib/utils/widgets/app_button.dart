@@ -3,25 +3,12 @@ import '../../constants/app_colors.dart';
 import '../../constants/app_spacing.dart';
 import '../../constants/app_text_styles.dart';
 
-/// A styled, full-width button with loading state support.
-/// Used throughout the app for primary and secondary actions.
 class AppButton extends StatelessWidget {
-  /// The button label text.
   final String label;
-
-  /// Callback when the button is pressed. Null disables the button.
   final VoidCallback? onPressed;
-
-  /// Whether the button is in a loading state (shows spinner).
   final bool isLoading;
-
-  /// Background color of the button.
   final Color? backgroundColor;
-
-  /// Text color of the button label.
   final Color? textColor;
-
-  /// Optional icon to display before the label.
   final IconData? icon;
 
   const AppButton({

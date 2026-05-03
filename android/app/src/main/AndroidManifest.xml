@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="invester_deal_management_app"
+        android:label="DealFlow"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
-/// A centered loading indicator using the app's primary color.
-/// Used as a loading placeholder across all features.
 class LoadingIndicator extends StatelessWidget {
-  /// Optional message displayed below the spinner.
   final String? message;
 
   const LoadingIndicator({super.key, this.message});
