@@ -28,6 +28,52 @@ A Flutter application for managing investment deals. Corporates post investment 
 - Remove interests with animated transitions
 - Persistent storage using SharedPreferences
 
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><b>Splash Screen</b></td>
+    <td align="center"><b>Login</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/Screenshot-1.jpg" width="220"/></td>
+    <td><img src="screenshots/Screenshot-2.jpg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Deal List</b></td>
+    <td align="center"><b>Search & Filter</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/Screenshot-4.jpg" width="220"/></td>
+    <td><img src="screenshots/Screenshot-11.jpg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Filter Sheet</b></td>
+    <td align="center"><b>Deal Detail</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/Screenshot-8.jpg" width="220"/></td>
+    <td><img src="screenshots/Screenshot-5.jpg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>ROI Chart</b></td>
+    <td align="center"><b>Risk Analysis</b></td>b
+  </tr>
+  <tr>
+    <td><img src="screenshots/Screenshot-6.jpg" width="220"/></td>
+    <td><img src="screenshots/Screenshot-12.jpg" width="220"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>I'm Interested</b></td>
+    <td align="center"><b>My Interests</b></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/Screenshot-7.jpg" width="220"/></td>
+    <td><img src="screenshots/Screenshot-10.jpg" width="220"/></td>
+  </tr>
+</table>
+
 ## Architecture
 
 **Feature-first clean architecture** with BLoC state management:
