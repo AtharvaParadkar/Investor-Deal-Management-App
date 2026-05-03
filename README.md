@@ -1,4 +1,6 @@
-# Investor Deal Management App
+# DealFlow - Invester Deal Management App
+
+[![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android)](apk/dealflow.apk)
 
 A Flutter application for managing investment deals. Corporates post investment opportunities, and investors can browse, filter, express interest, and track deals.
 
